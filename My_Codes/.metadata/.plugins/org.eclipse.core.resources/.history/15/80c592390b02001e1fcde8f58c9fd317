@@ -1,0 +1,31 @@
+package utils;
+
+import java.time.LocalDate;
+
+import customExp.EmployeeException;
+import entities.Employee;
+
+public class ValidationRules {
+
+	//==============================================
+	
+	public static Employee ValidateEmployee(String firstName, String lastName, String joiningDate, double salary)
+			throws EmployeeException {
+		
+		LocalDate validJoiningDate=validateJoiningDate(joiningDate);
+		return new Employee(firstName, lastName, validJoiningDate, salary);
+		
+
+	}
+
+	// =================================================
+
+	private static LocalDate validateJoiningDate(String joiningDate) throws EmployeeException {
+
+		LocalDate startDate = LocalDate.parse("2020-01-01");
+		if (joiningDate.isAfter(startDate))
+			return joiningDate;
+		throw new EmployeeException("Invalid Joining Date");
+	}
+
+}
